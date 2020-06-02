@@ -43,7 +43,7 @@ final public class IOParser implements Parser {
         }
 
         private String encodeAsString(Packet obj) {
-            StringBuilder str = new StringBuilder("" + obj.type);
+            StringBuffer str = new StringBuffer("" + obj.type);
 
             if (BINARY_EVENT == obj.type || BINARY_ACK == obj.type) {
                 str.append(obj.attachments);
@@ -132,7 +132,7 @@ final public class IOParser implements Parser {
 
             if (BINARY_EVENT == p.type || BINARY_ACK == p.type) {
                 if (!str.contains("-") || length <= i + 1) return error();
-                StringBuilder attachments = new StringBuilder();
+                StringBuffer attachments = new StringBuffer();
                 while (str.charAt(++i) != '-') {
                     attachments.append(str.charAt(i));
                 }
@@ -140,7 +140,7 @@ final public class IOParser implements Parser {
             }
 
             if (length > i + 1 && '/' == str.charAt(i + 1)) {
-                StringBuilder nsp = new StringBuilder();
+                StringBuffer nsp = new StringBuffer();
                 while (true) {
                     ++i;
                     char c = str.charAt(i);
@@ -156,7 +156,7 @@ final public class IOParser implements Parser {
             if (length > i + 1){
                 Character next = str.charAt(i + 1);
                 if (Character.getNumericValue(next) > -1) {
-                    StringBuilder id = new StringBuilder();
+                    StringBuffer id = new StringBuffer();
                     while (true) {
                         ++i;
                         char c = str.charAt(i);
